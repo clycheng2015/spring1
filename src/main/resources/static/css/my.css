@@ -1,0 +1,23 @@
+.head1{
+    color: #0000ff;
+    font-size: 50px;
+}
+
+h1 {
+    color: #00ffff;
+    font-size:90px;
+}
+
+#hh {
+    color: #ff00ff;
+    font-size:90px;
+}
+
+.container{
+    width: 1000px;
+    height: 600px;
+}
+
+.container img{
+    width: 200px;
+}

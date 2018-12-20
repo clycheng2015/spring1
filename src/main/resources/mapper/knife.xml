@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--坑点2：命名空间指向对应dao类名-->
+<mapper namespace="com.lewis.spring1.dao.KnifeDao">
+    <!--坑点3：id为dao中相应方法名-->
+    <insert id="insert">
+      insert into knife(name,atk,hit,crit,attr_id,type_id)
+      values (#{name},#{atk},#{hit},#{crit},#{attr_id},#{type_id})
+    </insert>
+    <!--坑点4：返回实体或实体集合时 resultType 指向对应实体类名-->
+    <select id="findByName" resultType="com.lewis.spring1.bean.Knife">
+        SELECT*FROM knife WHERE NAME=#{name}
+    </select>
+
+    <select id="findALL" resultType="com.lewis.spring1.bean.Knife">
+       SELECT id,name,atk,hit,crit,type_name,attr FROM knife AS s
+      INNER JOIN sword_type AS t ON s.type_id = t.type_id
+      INNER JOIN sword_attr AS a ON s.attr_id = a.attr_id;
+    </select>
+</mapper>

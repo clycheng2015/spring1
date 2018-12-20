@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HelloThymeleaf</title>
+    <link rel="stylesheet" href="../static/css/my1.css">
+    <link rel="stylesheet" href="../static/css/animate.css">
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/js/vue.min.js"></script>
+    <script type="module">
+        // import { readFileToJson } from "../static/js/json.js";
+        $(function () {
+            $("#add").click(function () {
+                // let result = 'F:\\test';
+                alert("xxxx")
+                // //window.location.href = "/add_form";//跳转
+                // readFileToJson(result);
+            });
+        });
+
+        /*
+        * http://106.15.191.9:8080/swords/findFormat
+        * */
+        function doList() {
+            $.getJSON('http://localhost:8080/swords/findFormat', function (data) {
+                    console.log("data====", data)
+                    new Vue({
+                        el: "#root",//与id是box的元素绑定
+                        data: {//数据
+                            imgData: data.data,
+                        }
+                    });
+                }
+            );
+        }
+
+        window.onload = doList;
+    </script>
+</head>
+<body>
+<div id="add">+</div>
+<div id="root">
+    <h1 class="animated bounceInDown">名剑表</h1>
+    <ul>
+        <li class="animated bounceIn" v-for="(val, key, index) in imgData" :key="index">
+            <a href=""><img :src="val.imgurl" width="300"></a>
+            <p><a :href="val.imgurl">{{val.name}}</a>
+            <div class="bottom">{{val.origin}}</div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

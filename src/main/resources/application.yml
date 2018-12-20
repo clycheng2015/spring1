@@ -1,0 +1,42 @@
+server:
+  port: 8080
+  servlet:
+    context-path:
+#这里是使用application-dev.yml的关键，不设置这个则导致application-dev.yml定义的变量无法被引用
+name: black magic
+#replace_text: black magic
+atk: 2500
+desc: "name:${name} And atk:${atk}"
+
+spring:
+  profiles:
+    active: dev
+  mvc:
+    static-path-pattern: /static/**
+    thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+      mode: HTML5
+      encoding: UTF-8
+    servlet:
+      content-type: text/html
+    devtools:
+      restart:
+        enabled: true
+        additional-paths: src/main/java
+    datasource:
+      driver-class-name: com.mysql.jdbc.Driver  #驱动类名--不变
+      url: jdbc:mysql://106.15.191.9:3306/lewis?serverTimezone=GMT%2B8&useSSL=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      username: root #用户名
+      password: 12345678 #密码（必须和数据库用户root设置的最新密码一致）（）
+      type: com.mchange.v2.c3p0.ComboPooledDataSource
+    jpa:
+      hibernate:
+        ddl-auto: none #见下
+      show-sql: true #控制台显示sql语句
+    pagehelper:
+      helper-dialect: mysql
+      reasonable: true
+      support-methods-arguments: true
+      params: count==countSql
+      page-size-zero: true
